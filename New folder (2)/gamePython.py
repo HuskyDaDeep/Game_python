@@ -1,4 +1,8 @@
 import random
+import time
+
+def countdown():
+    time.sleep(2.5)
 
 def create_monster():
     nome = "Monster"
@@ -108,19 +112,21 @@ while True:
         mLife = monster["Hp"]
         result = mLife - pAttack
         monster["Hp"] = result
+        countdown()
         if monster["Hp"] <= 0:
            mExp = monster["Exp"]
            pExp = player["Exp"]
            player["Exp"]= pExp + mExp
            print("You defeat the monster!")
-           if player["Exp"] == 100:
-                up = player["Magic"] + 1
-                player["Level"] = up
+           if player["Exp"] >= 100 * player["Level"]:
+               up = player["Level"] + 1
+               player["Level"] = up
+               print("Player level up!")
+               countdown()
+           countdown()
            monster = create_monster()
            monsterStatus()
-           
-           
-           
         else:
             print(f"Hp: {monster["Hp"]}")
             print("Try one more time!!")
+            countdown()
