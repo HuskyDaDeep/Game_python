@@ -10,15 +10,23 @@ def create_monster():
     Attack = random.randint(1, 100)
     Exp = random.randint(1, 100)
     
+            
+    
     Monster = {"Name": nome,
                "Hp": Hp,
                "Attack": Attack,
                "Exp": Exp
     }
     return Monster
+def monster_Attack():
+    M_Attack = random.randint(1,3)
+    if M_Attack == 2:
+        print(f"The monster attack you!  monster attack: {monster['Attack']}")
+        Damage = player["Hp"] - monster["Attack"]
+        player["Hp"] = Damage
 def typesP(): #P = Player
     print("Choose your player:")
-    print("1.Witch")
+    print("1.Witcher")
     print("2.Warrior")
     print("3.Thief")
     print("4.Evil")
@@ -129,4 +137,11 @@ while True:
         else:
             print(f"Hp: {monster["Hp"]}")
             print("Try one more time!!")
+            monster_Attack()
             countdown()
+        if player["Hp"] == 0:
+            print("You Died!")
+            break
+            
+                
+           
