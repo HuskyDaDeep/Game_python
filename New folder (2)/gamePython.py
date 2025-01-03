@@ -3,7 +3,31 @@ import time
 
 def countdown():
     time.sleep(2.5)
-
+def Levelup():
+    if player["Exp"] >= 100 * player["Level"]:
+               up = player["Level"] + 1
+               player["Level"] = up
+               print("Player level up!")
+               print("1. Health")
+               print("2. Attack")
+               print("3. Magic")
+               print("4. Defense")
+               up_Choice = int(input("O que deseja evoluir? "))
+               
+               match up_Choice:
+                    case 1:
+                        Hp_up = player["Hp"] + 30
+                        player["Hp"] = Hp_up
+                    case 2:
+                        Attack_up = player["Attack"] + 10
+                        player["Attack"] = Attack_up
+                    case 3:
+                        Magic_up = player["Magic"] + 1
+                        player["Magic"] = Magic_up
+                    case 4:
+                        Defense_up = player["Defense"] + 1.5
+                        player["Defense"] = Defense_up
+               countdown()
 def create_monster():
     nome = "Monster"
     Hp = random.randint(1, 100)
@@ -18,6 +42,12 @@ def create_monster():
                "Exp": Exp
     }
     return Monster
+def defense_System(): 
+    if choice == 2:
+        Damage_defense = player["Hp"] - (monster["Attack"] - player["Defense"])
+        player["Hp"] = Damage_defense
+def magic_System():
+    a     
 def monster_Attack():
     M_Attack = random.randint(1,3)
     if M_Attack == 2:
@@ -47,8 +77,9 @@ def character(x):
             case 1:
                 Witch = {"Name": "Witch",
                     "Hp": 100,
-                    "Attack": 1000,
+                    "Attack": 10,
                     "Level": 1,
+                    "Defense": 0,
                     "Exp": 0,
                     "Magic": 0}
                 return Witch
@@ -57,6 +88,7 @@ def character(x):
                         "Hp": 100,
                         "Attack": 10,
                         "Level": 1,
+                        "Defense": 0,
                         "Exp": 0,
                         "Magic": 0}
                 return Warrior
@@ -65,6 +97,7 @@ def character(x):
                         "Hp": 100,
                         "Attack": 10,
                         "Level": 1,
+                        "Defense": 0,
                         "Exp": 0,
                         "Magic": 0}
                 return Thief
@@ -73,6 +106,7 @@ def character(x):
                     "Hp": 100,
                     "Attack": 10,
                     "Level": 1,
+                    "Defense": 0,
                     "Exp": 0,
                     "Magic": 0}
                 return Evil
@@ -102,8 +136,10 @@ while True:
                 print("You attack the monster")
             case 2:
                 print("You try to defense monster attack")
+                defense_System()
             case 3:
-                print("You need level for this")
+                if player["Magic"] <= 5:
+                    print("You need level for this")
             case 4: 
                 print("Thanks for play!!")
                 break
@@ -126,11 +162,7 @@ while True:
            pExp = player["Exp"]
            player["Exp"]= pExp + mExp
            print("You defeat the monster!")
-           if player["Exp"] >= 100 * player["Level"]:
-               up = player["Level"] + 1
-               player["Level"] = up
-               print("Player level up!")
-               countdown()
+           Levelup()
            countdown()
            monster = create_monster()
            monsterStatus()
