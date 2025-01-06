@@ -14,9 +14,9 @@ def Levelup():
                print("2. Attack")
                print("3. Magic")
                print("4. Defense")
-               up_Choice = int(input("What do you want to up?: "))
                # logic for up stats
                while True:
+                up_Choice = int(input("What do you want to up?: "))
                 match up_Choice:
                         case 1:
                             Hp_up = player["Hp"] + 30
@@ -35,7 +35,7 @@ def Levelup():
                             player["Defense"] = Defense_up
                             break
                         case _:
-                            print("Opção invalida")
+                            print("Invalid option")
                countdown()
                playerStatus(player)
 # Monster creation
@@ -45,7 +45,7 @@ def create_monster():
     Attack = random.randint(1, 100)
     Exp = random.randint(1, 100)
     
-            
+          
     # Monster dictionary
     Monster = {"Name": nome,
                "Hp": Hp,
@@ -53,6 +53,35 @@ def create_monster():
                "Exp": Exp
     }
     return Monster
+# Monster types
+def typesM(x): #M = Monster
+    match x:
+        case 1:
+            Goblin = {"Name": "Goblin",
+                    "Hp": random.randint(1, 100),
+                    "Attack": random.randint(1, 100),
+                    "Exp": random.randint(1, 100)}
+            return Goblin
+        case 2:
+            Orc = {"Name": "Orc",
+                    "Hp": random.randint(1, 100),
+                    "Attack": random.randint(1, 100),
+                    "Exp": random.randint(1, 100)}
+            return Orc
+        case 3: 
+            Dragon = {"Name": "Dragon",
+                    "Hp": random.randint(1, 100),
+                    "Attack": random.randint(1, 100),
+                    "Exp": random.randint(1, 100)}
+            return Dragon
+        case 4: 
+            Troll = {"Name": "Troll",
+                    "Hp": random.randint(1, 100),
+                    "Attack": random.randint(1, 100),
+                    "Exp": random.randint(1, 100)}
+            return Troll
+        case _:
+            print("Invalid option")
 # Player attack system
 def attack_System(player, monster):
     # logic for attack
@@ -146,7 +175,7 @@ def character(x):
                 return Evil
                 break
             case _:
-                print("Opção invalida")
+                print("Invalid option")
 # Menu game       
 def menuGame():
     print("Choose your action")
@@ -160,7 +189,7 @@ def menuGame():
 # Main game
 choice = int(input("What's your choice?: "))
 player = character(choice)
-monster = create_monster()
+monster = typesM(random.randint(1, 4)) # Random monster
 monsterStatus(monster)
 while True:
     
@@ -173,7 +202,7 @@ while True:
                 print("You attack the monster")
             case 2:
                 print("You try to defense monster attack")
-                defense_System()
+                defense_System(player, monster)
             case 3:
                 if player["Magic"] <= 5:
                     print("You need level for this")
@@ -185,7 +214,7 @@ while True:
             case 6: 
                 monsterStatus(monster)
             case _:
-                print("Opção invalida")
+                print("Invalid option")
             
     if option == 1:
         attack_System(player, monster)
@@ -197,14 +226,14 @@ while True:
            print("You defeat the monster!")
            Levelup()
            countdown()
-           monster = create_monster()
+           monster = typesM(random.randint(1, 4)) 
            monsterStatus(monster)
         else:
             print(f"Hp: {monster["Hp"]}")
             print("Try one more time!!")
             monster_Attack(monster, player)
             countdown()
-        if player["Hp"] == 0:
+        if player["Hp"] <= 0:
             print("You Died!")
             break
             
